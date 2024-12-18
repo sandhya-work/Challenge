@@ -1,8 +1,13 @@
 # Cars Code Challenge
 
-Requires Java 17
+## Instructions
 
-Instructions:
+1. This challenge should be completed in one sitting. There is no time limit, but we will be looking at commit timestamps
+2. The parts of the challenge should be completed in order
+3. Please create your own branch from the "challenge" branch in the following format: "solutions/NAME-MMDDYYYY"
+4. Changes made for each part should be made in a single commit with a detailed commit message, with the exception of changes made for Part 2. Each bug in Part 2 should have it's own commit with a detailed commit message.
+
+*Requires Java 17
 
 ### Part 1: Debug and fix startup issues
 
@@ -26,4 +31,5 @@ Example Create Car Payload:
 
 ### Part 4: Refactor API contract to be more RESTful, where applicable
 
-### Bonus: What else did you find?
+### Bonus: If you have extra time, feel free to make any more changes that you find appropriate
+
