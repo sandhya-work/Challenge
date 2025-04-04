@@ -45,9 +45,9 @@ public class CarService {
     	}
     }
 
-    public CarDto update(CarDto car) {
+    public CarDto update(Long id, CarDto car) {
     	try {
-        Optional<Car> optionalCar = carRepository.findById(car.getId());
+        Optional<Car> optionalCar = carRepository.findById(id);
         if (optionalCar.isPresent()) {
             var foundCar = optionalCar.get();
             foundCar.setMake(car.getMake());
@@ -74,9 +74,9 @@ public class CarService {
     	}
     }
 
-    public void delete(CarDto car) {
+    public void delete(Long id) {
     	try {
-        Optional<Car> optionalCar = carRepository.findById(car.getId());
+        Optional<Car> optionalCar = carRepository.findById(id);
         if (optionalCar.isPresent()) {
             var foundCar = optionalCar.get();
             log.info("Soft deleting car with id: {}", foundCar.getId());

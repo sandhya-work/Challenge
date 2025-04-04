@@ -26,23 +26,24 @@ public class CarsController {
     @GetMapping
     public ResponseEntity<List<CarDto>> getAllCars() {
         log.info("Getting all active cars");
-        return ResponseEntity.ok(carService.getAll());
+        return new ResponseEntity<>(carService.getAll(), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<CarDto> createCar(@RequestBody CarDto car) {
-        return ResponseEntity.ok(carService.createCar(car));
+        return new ResponseEntity<>(carService.createCar(car),HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/update")
-    public ResponseEntity<CarDto> updateCar(@RequestBody CarDto car) {
-        return ResponseEntity.ok(carService.update(car));
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<CarDto> updateCar(@PathVariable Long id, @RequestBody CarDto car) {
+        return new ResponseEntity<>(carService.update(id, car),HttpStatus.OK);
     }
 
-    @PostMapping(path = "/delete")
-    public ResponseEntity<CarDto> deleteCar(@RequestBody CarDto car) {
-        carService.delete(car);
-        return ResponseEntity.ok(null);
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
+    	carService.delete(id); 
+        return ResponseEntity.noContent().build();
+    	
     }
 
     // Custom exception handler for validation errors
