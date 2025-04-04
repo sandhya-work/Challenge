@@ -4,6 +4,9 @@ import com.unfi.codechallenges.cars.dto.CarDto;
 import com.unfi.codechallenges.cars.entity.Car;
 import com.unfi.codechallenges.cars.repository.CarRepository;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ public class CarService {
     }
 
     public CarDto createCar(CarDto car) {
+    	try {
         var newCar = new Car(car.getMake(), car.getModel(), car.getYear(), car.getVin());
         log.info("Creating car");
         var createdCar = carRepository.save(newCar);
@@ -32,9 +36,17 @@ public class CarService {
                 .year(createdCar.getYear())
                 .vin(createdCar.getVin())
                 .build();
+    	}
+    	catch(Exception ce)
+    	{
+            log.error("Error while creating car", ce);
+
+            throw new RuntimeException("Failed to create car");
+    	}
     }
 
     public CarDto update(CarDto car) {
+    	try {
         Optional<Car> optionalCar = carRepository.findById(car.getId());
         if (optionalCar.isPresent()) {
             var foundCar = optionalCar.get();
@@ -54,9 +66,16 @@ public class CarService {
         } else {
             throw new RuntimeException("Car not found");
         }
+    	}
+    	catch(Exception ue)
+    	{
+    		log.error("Error while updating the car", ue);
+            throw new RuntimeException("Failed to update the car");
+    	}
     }
 
     public void delete(CarDto car) {
+    	try {
         Optional<Car> optionalCar = carRepository.findById(car.getId());
         if (optionalCar.isPresent()) {
             var foundCar = optionalCar.get();
@@ -66,9 +85,16 @@ public class CarService {
         } else {
             throw new RuntimeException("Car not found");
         }
+    	}
+    	catch(Exception de)
+    	{
+    		log.error("Error while deleting car", de);
+            throw new RuntimeException("Failed to delete the car");
+    	}
     }
 
     public List<CarDto> getAll() {
+    	try {
         var allCars = carRepository.findAllByIsActiveTrue();
         List<CarDto> cars = new ArrayList();
         for (Car car : allCars) {
@@ -82,5 +108,11 @@ public class CarService {
             );
         }
         return cars;
+    	}
+    	catch(Exception ge)
+    	{
+    		log.error("Error while getting the list of cars", ge);
+            throw new RuntimeException("Failed to getting the list of cars");
+    	}
     }
 }
