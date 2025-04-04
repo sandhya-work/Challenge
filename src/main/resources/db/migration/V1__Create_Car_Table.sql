@@ -10,7 +10,7 @@ CREATE SEQUENCE CAR_SEQ
 
 -- Create Car Table
 CREATE TABLE CAR (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
   make VARCHAR(255) NOT NULL,
   model VARCHAR(255) NOT NULL,
   year_built VARCHAR(255) NOT NULL,
@@ -31,3 +31,5 @@ INSERT INTO CAR (make, model, year_built, vin, is_active) VALUES
  ('Mercedes-Benz', 'C-Class', 2021, 'WDDGF8BB3DR123456', true),
  ('Volkswagen', 'Jetta', 2018, '3VWD17AJ5FM123456', true),
  ('Nissan', 'Altima', 2022, '1N4AL3AP4JC123456', true);
+ 
+ ALTER SEQUENCE CAR_SEQ RESTART WITH 11;
