@@ -115,4 +115,30 @@ public class CarService {
             throw new RuntimeException("Failed to getting the list of cars");
     	}
     }
+
+	public CarDto getById(Long id)
+	{
+		try {
+			Optional<Car> optionalCar = carRepository.findById(id);
+	        if (optionalCar.isPresent()) {
+	            var foundCar = optionalCar.get();
+	            log.info("Getting the car by id", foundCar.getId());
+	            return CarDto.builder()
+	                    .id(foundCar.getId())
+	                    .make(foundCar.getMake())
+	                    .model(foundCar.getModel())
+	                    .year(foundCar.getYear())
+	                    .vin(foundCar.getVin())
+	                    .build();
+	        } else {
+	            throw new RuntimeException("Car not found");
+			
+		}
+		}
+		catch (Exception be)
+		{
+			log.error("Error while getting the requested car by Id", be);
+            throw new RuntimeException("Failed to get the requested car by Id");
+		}
+	}
 }

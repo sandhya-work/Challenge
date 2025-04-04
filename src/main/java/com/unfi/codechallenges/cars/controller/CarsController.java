@@ -33,6 +33,12 @@ public class CarsController {
     public ResponseEntity<CarDto> createCar(@RequestBody CarDto car) {
         return new ResponseEntity<>(carService.createCar(car),HttpStatus.CREATED);
     }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<CarDto> getCarById(@PathVariable Long id) {
+        log.info("Getting requested car by Id");
+        return new ResponseEntity<>(carService.getById(id), HttpStatus.FOUND);
+    }
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<CarDto> updateCar(@PathVariable Long id, @RequestBody CarDto car) {
