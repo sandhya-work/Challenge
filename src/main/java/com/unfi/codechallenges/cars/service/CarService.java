@@ -80,8 +80,8 @@ public class CarService {
         if (optionalCar.isPresent()) {
             var foundCar = optionalCar.get();
             log.info("Soft deleting car with id: {}", foundCar.getId());
-            foundCar.setIsActive(false);
-            carRepository.save(foundCar);
+            //foundCar.setIsActive(false);
+            carRepository.delete(foundCar);
         } else {
             throw new RuntimeException("Car not found");
         }
