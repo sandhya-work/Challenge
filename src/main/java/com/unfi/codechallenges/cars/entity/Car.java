@@ -62,6 +62,6 @@ public class Car {
     @PreUpdate
     protected void onUpdate() {
         lastUpdated = LocalDateTime.now();
-        isActive = true;
+        //isActive = true;
     }
 }
